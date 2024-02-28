@@ -1,5 +1,5 @@
 ---
-title: 'about'
+title: 'About'
 created: '2022-03-05'
 ---
 

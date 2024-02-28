@@ -18,6 +18,13 @@
 		{ name: 'Contact', slug: 'contact', icon: contact },
 	];
 
+	const videos = [
+		{
+			name: 'demo.mp4',
+			link: 'https://www.youtube.com/watch?v=3v1n3v7k3v',
+		},
+	];
+
 	const selectedTab = ref(null);
 </script>
 
@@ -31,12 +38,24 @@
 				background-size: cover;
 			"
 		></div>
+		<div class="absolute inset-x-[20px] top-10 flex w-20 flex-col gap-8">
+			<div v-for="video in videos" :key="video">
+				<a
+					class="flex cursor-pointer flex-col items-center"
+					:href="video.link"
+					target="_blank"
+				>
+					<img src="/video-icon.png" alt="" class="h-8 w-auto" />
+					<div style="font-size: 9px">{{ video.name }}</div>
+				</a>
+			</div>
+		</div>
 
 		<div
 			class="absolute flex h-full w-full items-center justify-center overflow-clip"
 		>
 			<div
-				class="inset-x-0 flex max-h-[600px] min-w-[500px] max-w-[500px] flex-col justify-between border border-black bg-[#EDFBFC]"
+				class="inset-x-0 flex max-h-[650px] min-w-[600px] max-w-[600px] flex-col justify-between border border-black bg-[#EDFBFC]"
 				style="box-shadow: 5px 5px 0 #0003 !important"
 			>
 				<div
@@ -48,7 +67,7 @@
 								@click="selectedTab = null"
 								class="flex h-4 w-4 items-center justify-center"
 							>
-								🅇</button
+								𝗫</button
 							><button
 								@click="showSection = !showSection"
 								class="flex h-4 w-4 items-center justify-center"
@@ -74,33 +93,21 @@
 					<div class="px-1 pb-1" v-if="showSection">
 						<div
 							v-if="selectedTab === null"
-							class="max-h-[420px] border border-black"
+							class="max-h-[420px] overflow-clip border border-black"
 						>
 							<img
 								src="/wallpaper.png"
 								class="h-full w-full"
-								style="image-rendering: crisp-edges"
+								style="image-rendering: crisp-edges; background-size: cover"
 							/>
 						</div>
 						<div
 							v-else
 							class="max-h-[420px] min-h-[420px] overflow-y-auto border border-black p-2"
-							style="
-								scrollbar-width: thin;
-								scrollbar-color: #000 #fffdf8;
-								::-webkit-scrollbar {
-									width: 12px;
-									background-color: #f5f5f5;
-								}
-								::-webkit-scrollbar-thumb {
-									border-radius: 10px;
-									-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-								}
-							"
 						>
 							<ContentDoc
 								:path="`/${selectedTab.slug}`"
-								class="prose prose-stone"
+								class="scroll prose prose-zinc"
 								style="
 									font-size: 10px;
 									color: black;
@@ -146,3 +153,24 @@
 		</div>
 	</div>
 </template>
+
+<style scoped>
+	/* Style for the scrollbar track */
+
+	.scroll::-webkit-scrollbar {
+		width: 1em;
+	}
+
+	.scroll::-webkit-scrollbar-track {
+		box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	}
+
+	.scroll::-webkit-scrollbar-thumb {
+		background-color: darkgrey;
+		outline: 1px solid slategrey;
+	}
+
+	hr {
+		border-top: 1px solid black;
+	}
+</style>
