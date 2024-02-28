@@ -1,5 +1,5 @@
 <script setup>
-	const showImage = ref(true);
+	const showSection = ref(true);
 
 	import now from '../public/icons/undead/Icon21.png';
 	import about from '../public/icons/undead/Icon16.png';
@@ -14,14 +14,14 @@
 		{ name: 'Projects', slug: 'projects', icon: projects },
 		{ name: 'Resume', slug: 'resume', icon: resume },
 		{ name: 'Contact', slug: 'contact', icon: contact },
-		// { name: 'Blog', slug: 'blog', icon: sword },
+		{ name: 'Blog', slug: 'blog', icon: sword },
 	];
 
 	const selectedTab = ref(null);
 </script>
 
 <template>
-	<div class="overflow-clip w-full h-full">
+	<div class="h-full w-full overflow-clip">
 		<div
 			class="fixed h-full w-screen"
 			style="background-image: url('/bg.png'); background-repeat: repeat"
@@ -43,22 +43,28 @@
 								@click="selectedTab = null"
 								class="flex h-4 w-4 items-center justify-center"
 							>
-								X</button
+								🅇</button
 							><button
-								@click="showImage = !showImage"
+								@click="showSection = !showSection"
 								class="flex h-4 w-4 items-center justify-center"
 							>
-								^
+								{{ showSection ? '⬆' : '⬇' }}
 							</button>
 						</div>
 						<div class="w-auto flex-grow space-y-0.5">
-							<div class="h-px border-t border-black"></div>
-							<div class="h-px border-t border-black"></div>
-							<div class="h-px border-t border-black"></div>
+							<div
+								class="h-px border-b border-t border-b-white border-t-black"
+							></div>
+							<div
+								class="h-px border-b border-t border-b-white border-t-black"
+							></div>
+							<div
+								class="h-px border-b border-t border-b-white border-t-black"
+							></div>
 						</div>
-						<h3 style="font-size: 9px">Will Marzella</h3>
+						<h3 style="font-size: 8px; font-weight: 200">Will Marzella</h3>
 					</div>
-					<div class="px-1 pb-1">
+					<div class="px-1 pb-1" v-if="showSection">
 						<div
 							v-if="selectedTab === null"
 							class="max-h-[420px] border border-black"
@@ -93,14 +99,16 @@
 						<div
 							:class="[
 								'h-24 w-full border-black',
-								i === tabs.length - 1 ? '' : 'border-r active:translate-y-px ',
+								i === tabs.length - 1
+									? ''
+									: 'border-r focus:translate-y-[1px] active:translate-y-[1px]',
 							]"
 							v-for="(tab, i) in tabs"
 							:key="tab"
 							@click="selectedTab = tab"
 						>
 							<div
-								class="relative z-50 flex h-full w-auto flex-grow flex-col items-center justify-evenly border-b border-l border-r border-t border-b-black/30 border-l-white border-r-black/30 border-t-white p-1"
+								class="relative z-50 flex h-full w-auto flex-grow flex-col items-center justify-between border-b border-l border-r border-t border-b-black/30 border-l-white border-r-black/30 border-t-white pb-1 pt-2"
 							>
 								<img
 									:src="tab.icon"
