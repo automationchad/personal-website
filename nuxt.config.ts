@@ -3,14 +3,14 @@
 export default defineNuxtConfig({
 	app: {
 		head: {
-			title: 'Motis Group | Coding API integrations for fast growing companies',
+			title: 'William Marzella | Engineering Systems Manager',
 			charset: 'utf-8',
 			viewport: 'width=device-width, initial-scale=1',
 			meta: [
 				{
 					name: 'description',
 					content:
-						'A boutique dev shop assisting fast growing companies with process automation and software interoperability.',
+						'William Marzella, an experienced Engineering Systems Manager, specializes in optimizing engineering processes and systems for efficiency and innovation.',
 				},
 			],
 			link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
