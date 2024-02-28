@@ -1,20 +1,21 @@
 <script setup>
 	const showSection = ref(true);
 
-	import now from '../public/icons/undead/Icon21.png';
-	import about from '../public/icons/undead/Icon16.png';
+	import now from '../public/icons/pirate/Icon20.png';
+	import about from '../public/icons/pirate/Icon19.png';
 	import projects from '../public/icons/undead/Icon7.png';
-	import resume from '../public/icons/undead/Icon4.png';
-	import contact from '../public/icons/undead/Icon13.png';
-	import sword from '../public/icons/pirate/Icon1.png';
+	import resume from '../public/icons/pirate/Icon31.png';
+	import certs from '../public/icons/pirate/Icon3.png';
+	import cert2 from '../public/icons/pirate/Icon47.png';
+	import contact from '../public/icons/pirate/Icon47.png';
 
 	const tabs = [
 		{ name: 'Now', slug: 'now', icon: now },
 		{ name: 'About', slug: 'about', icon: about },
 		{ name: 'Projects', slug: 'projects', icon: projects },
 		{ name: 'Resume', slug: 'resume', icon: resume },
+		{ name: 'Certs', slug: 'certs', icon: certs },
 		{ name: 'Contact', slug: 'contact', icon: contact },
-		{ name: 'Blog', slug: 'blog', icon: sword },
 	];
 
 	const selectedTab = ref(null);
@@ -31,7 +32,7 @@
 			class="absolute flex h-full w-full items-center justify-center overflow-clip"
 		>
 			<div
-				class="inset-x-0 flex max-h-[800px] min-w-[500px] max-w-[500px] flex-col justify-between overflow-y-auto border border-black bg-[#F9EEE4] backdrop-blur-sm"
+				class="inset-x-0 flex max-h-[600px] min-w-[500px] max-w-[500px] flex-col justify-between border border-black bg-[#F9EEE4]"
 				style="box-shadow: 5px 5px 0 #0003 !important"
 			>
 				<div
@@ -78,6 +79,18 @@
 						<div
 							v-else
 							class="max-h-[420px] min-h-[420px] overflow-y-auto border border-black p-2"
+							style="
+								scrollbar-width: thin;
+								scrollbar-color: #000 #fffdf8;
+								::-webkit-scrollbar {
+									width: 12px;
+									background-color: #f5f5f5;
+								}
+								::-webkit-scrollbar-thumb {
+									border-radius: 10px;
+									-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+								}
+							"
 						>
 							<ContentDoc
 								:path="`/${selectedTab.slug}`"
@@ -101,7 +114,7 @@
 								'h-24 w-full border-black',
 								i === tabs.length - 1
 									? ''
-									: 'border-r focus:translate-y-[1px] active:translate-y-[1px]',
+									: 'border-r focus:translate-x-px focus:translate-y-[2px] active:translate-x-px active:translate-y-[2px]',
 							]"
 							v-for="(tab, i) in tabs"
 							:key="tab"
