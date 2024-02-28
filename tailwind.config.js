@@ -12,7 +12,7 @@ module.exports = {
 	theme: {
 		fontFamily: {
 			arial: ['arial', 'sans-serif'],
-			chicago: ['"Chicago"', 'sans-serif'],
+			chicago: ['pix Chicago', 'sans-serif'],
 		},
 		extend: {
 			transitionProperty: {

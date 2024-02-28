@@ -63,7 +63,7 @@
 								class="h-px border-b border-t border-b-white border-t-black"
 							></div>
 						</div>
-						<h3 style="font-size: 8px; font-weight: 200">Will Marzella</h3>
+						<h3 style="font-size: 8px; font-weight: 200" class="font-chicago">Will Marzella</h3>
 					</div>
 					<div class="px-1 pb-1" v-if="showSection">
 						<div

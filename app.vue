@@ -22,9 +22,9 @@
 		margin: 0;
 	}
 
-	h3 {
+	/* h3 {
 		font-family: 'pix Chicago', sans-serif;
-	}
+	} */
 
 	html {
 		scroll-behavior: smooth;
