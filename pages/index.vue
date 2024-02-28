@@ -125,6 +125,7 @@
 							<ContentDoc
 								:path="`/${selectedTab.slug}`"
 								class="scroll prose prose-zinc"
+								:head="false"
 								style="
 									font-size: 10px;
 									color: black;
