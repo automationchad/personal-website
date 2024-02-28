@@ -25,14 +25,18 @@
 	<div class="h-full w-full overflow-clip">
 		<div
 			class="fixed h-full w-screen"
-			style="background-image: url('/bg.png'); background-position: center; background-size: cover"
+			style="
+				background-image: url('/bg.png');
+				background-position: center;
+				background-size: cover;
+			"
 		></div>
 
 		<div
 			class="absolute flex h-full w-full items-center justify-center overflow-clip"
 		>
 			<div
-				class="inset-x-0 flex max-h-[600px] min-w-[500px] max-w-[500px] flex-col justify-between border border-black bg-[#F9EEE4]"
+				class="inset-x-0 flex max-h-[600px] min-w-[500px] max-w-[500px] flex-col justify-between border border-black bg-[#EDFBFC]"
 				style="box-shadow: 5px 5px 0 #0003 !important"
 			>
 				<div
@@ -63,7 +67,9 @@
 								class="h-px border-b border-t border-b-white border-t-black"
 							></div>
 						</div>
-						<h3 style="font-size: 8px; font-weight: 200" class="font-chicago">Will Marzella</h3>
+						<h3 style="font-size: 8px; font-weight: 200" class="font-chicago">
+							Will Marzella
+						</h3>
 					</div>
 					<div class="px-1 pb-1" v-if="showSection">
 						<div
