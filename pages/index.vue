@@ -25,7 +25,7 @@
 	<div class="h-full w-full overflow-clip">
 		<div
 			class="fixed h-full w-screen"
-			style="background-image: url('/bg.png'); background-repeat: repeat"
+			style="background-image: url('/bg.png'); background-position: center; background-size: cover"
 		></div>
 
 		<div
