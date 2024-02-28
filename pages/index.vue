@@ -4,24 +4,36 @@
 	import now from '../public/icons/pirate/Icon20.png';
 	import about from '../public/icons/pirate/Icon19.png';
 	import projects from '../public/icons/undead/Icon7.png';
-	import resume from '../public/icons/pirate/Icon31.png';
+	import resume from '../public/icons/undead/Icon32.png';
 	import certs from '../public/icons/pirate/Icon3.png';
-	import cert2 from '../public/icons/pirate/Icon47.png';
 	import contact from '../public/icons/pirate/Icon47.png';
 
 	const tabs = [
 		{ name: 'Now', slug: 'now', icon: now },
 		{ name: 'About', slug: 'about', icon: about },
 		{ name: 'Projects', slug: 'projects', icon: projects },
-		{ name: 'Resume', slug: 'resume', icon: resume },
 		{ name: 'Certs', slug: 'certs', icon: certs },
 		{ name: 'Contact', slug: 'contact', icon: contact },
 	];
 
-	const videos = [
+	const files = [
 		{
-			name: 'demo.mp4',
+			name: 'tray-demo.mp4',
+			type: 'video/mp4',
+			link: 'https://www.youtube.com/watch?v=OYRTeoIPoTU',
+			icon: '/icons/video.png',
+		},
+		{
+			name: 'walkthru.mp4',
+			type: 'video/mp4',
+			link: 'https://www.youtube.com/watch?v=TRAXsFbry7Q',
+			icon: '/icons/video.png',
+		},
+		{
+			name: 'resume.pdf',
+			type: 'application/pdf',
 			link: 'https://www.youtube.com/watch?v=3v1n3v7k3v',
+			icon: '/icons/undead/Icon32.png',
 		},
 	];
 
@@ -38,15 +50,20 @@
 				background-size: cover;
 			"
 		></div>
-		<div class="absolute inset-x-[20px] top-10 flex w-20 flex-col gap-8">
-			<div v-for="video in videos" :key="video">
+		<div class="absolute inset-x-[20px] top-10 z-10 flex w-32 flex-col gap-8">
+			<div v-for="file in files" :key="file">
 				<a
-					class="flex cursor-pointer flex-col items-center"
-					:href="video.link"
+					class="group flex cursor-pointer flex-col items-center space-y-1"
+					:href="file.link"
 					target="_blank"
 				>
-					<img src="/video-icon.png" alt="" class="h-8 w-auto" />
-					<div style="font-size: 9px">{{ video.name }}</div>
+					<img :src="file.icon" alt="" class="h-10 w-auto" />
+					<div
+						style="font-size: 9px"
+						class="leading-0 flex items-center justify-center px-1 group-visited:border group-visited:border-dotted group-visited:border-white group-target:bg-black group-target:text-white group-focus:border group-focus:border-dotted group-focus:border-white group-focus:bg-black group-focus:text-white group-active:bg-black group-active:text-white"
+					>
+						{{ file.name }}
+					</div>
 				</a>
 			</div>
 		</div>
@@ -65,12 +82,12 @@
 						<div class="flex flex-row space-x-1" style="font-size: 7px">
 							<button
 								@click="selectedTab = null"
-								class="flex h-4 w-4 items-center justify-center"
+								class="flex h-4 w-4 items-center justify-center border border-black"
 							>
 								𝗫</button
 							><button
 								@click="showSection = !showSection"
-								class="flex h-4 w-4 items-center justify-center"
+								class="flex h-4 w-4 items-center justify-center border border-black"
 							>
 								{{ showSection ? '⬆' : '⬇' }}
 							</button>

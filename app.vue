@@ -4,11 +4,12 @@
 
 <style>
 	body {
-		background: #fffdf8;
 		color: black;
 		font-size: 11px;
 		line-height: 200%;
 		font-family: 'Arial', sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 	}
 
 	/* h3 {
