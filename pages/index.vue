@@ -72,7 +72,8 @@
 			class="absolute flex h-full w-full items-center justify-center overflow-clip"
 		>
 			<div
-				class="inset-x-0 flex max-h-[650px] min-w-[600px] max-w-[600px] flex-col justify-between border border-black bg-[#EDFBFC]"
+				@click="makeTopElement"
+				class="inset-x-0 z-10 flex max-h-[650px] min-w-[600px] max-w-[600px] flex-col justify-between border border-black bg-[#EDFBFC]"
 				style="box-shadow: 5px 5px 0 #0003 !important"
 			>
 				<div
@@ -169,6 +170,7 @@
 				</div>
 			</div>
 		</div>
+		<VideoPlayer class="absolute right-12 top-10 z-0" />
 	</div>
 </template>
 

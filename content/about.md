@@ -3,34 +3,22 @@ title: 'About'
 created: '2022-03-05'
 ---
 
-Hello my fellow human being 👋. 
+![](./profile-dithered.png){style="width: 100px; margin: 0;"}
 
-Here's the quick and dirty rundown...
+I'm an engineer, systems manager, and consultant with a focus on sales engineering, backend development, machine learning, AI, and API integration.
 
-🇺🇸 2018 - 2023: Swam across the Pacific to California where I went from a degree in Mechanical Engineering to a tech company sales role, then to orchestrating consulting projects in enterprise integrations, process automation and software development. 
+My core contribution lies in bridging the gap between technical capabilities and customer needs, creating a seamless interface for software applications. This approach has allowed me to transition into a role where I manage systems engineering, leveraging my expertise to lead development teams and orchestrate projects that align technological solutions with strategic business goals.
 
-🇦🇺 2024 - beyond: Now back in my hometown Melbourne, I'm looking for an in-house full-time Sales Engineering position. Why? 
+My proficiency extends across database management, workflow orchestration, and server architecture, employing platforms like AWS, GCP, and Azure.
 
-1. I value collaborative progress (IMO something you can only get by being internal).
+This endeavor is a synthesis of methodologies from various domains, applying principles of sales engineering and systems management to solve complex challenges in tech companies and SaaS environments.
 
-2. I bring holistic experience in leading teams and navigating pre-sales challenges (which requires both tech and communication skills).
+I've recently embarked on a self-employed path, establishing myself as a Systems Engineering Manager, and concurrently, I am exploring opportunities to transition back into an in-house role as a Sales Engineer.
 
-3. I understand where AI and automation *should* sit: which is hopefully somewhere between working reliably and aligning with human needs.
+This decision stems from a belief in the transformative power of collaborative work environments to drive corporate progress. My consulting experience, rich with insights on team dynamics and strategic problem-solving, has prepared me for executive-level technical pre-sales engagements, where I tackle intricate challenges and high-stakes decisions.
 
-Now I'll be honest: I'm not Vitalik Buterin hiding in a cave coding the next Skynet...
+My work is influenced by practical experiences in the tech industry, integrating backend development with machine learning and AI to enhance business operations.
 
-... (I know enough Python and Javascript to be dangerous in this crazy age of AI and the internet) ...
+It finds relevance in areas such as enterprise-scale project management, technology solution design, and the development of sales engineering strategies that resonate with both technical teams and executive stakeholders.
 
-But I do have a system designer's mind. 
-
-My approach is practical, focusing on using technical skills to deliver clear business value.
-
-Which means I think procedurally about: (1) What are we building? and (2) How do we join the LEGO pieces together?
-
-... to build something of value. 
-
-I can appreciate what businesses actually need and am realistic about what it takes to get there. 
-
-Eager to contribute to deep tech (combo of hardware and software), and B2B tech (with complex enough deal cycles).
-
-If you appreciate someone technical that also has the gift of the gab...let's connect 😄
+Click on the contact tab to reach out!
