@@ -104,7 +104,13 @@
 								class="h-px border-b border-t border-b-white border-t-black"
 							></div>
 						</div>
-						<h3 style="font-size: 8px; font-weight: 200" class="font-chicago">
+						<h3
+							style="
+								font-size: 8px;
+								font-weight: 200;
+								font-family: 'pix Chicago', sans-serif;
+							"
+						>
 							Will Marzella
 						</h3>
 					</div>
