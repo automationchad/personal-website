@@ -7,12 +7,12 @@
 @font-face {
 	font-family: 'arial';
 	src: url('../../public/fonts/arial/PixelArialRegular.ttf') format('truetype');
-	font-style: bitmap;
+	font-style: sans-serif;
 }
 
 @font-face {
 	font-family: 'pix Chicago';
 	src: url('../../public/fonts/chicago/PixelChicagoRegular.ttf')
 		format('truetype');
-	font-style: bitmap;
+	font-style: sans-serif;
 }

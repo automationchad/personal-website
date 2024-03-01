@@ -33,7 +33,7 @@
 				<div class="px-1 pb-1">
 					<div class="image overflow-clip border border-black">
 						<div
-							class="absolute z-50 flex w-full items-center justify-between bg-black/20 px-2 text-white"
+							class="absolute z-50 flex w-full items-center justify-between bg-black/40 px-2 text-white"
 							style="font-size: 8px"
 						>
 							<div>{{ selectedFile }}</div>
