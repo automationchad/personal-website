@@ -10,5 +10,5 @@ List of certs I've done:
 - CompTIA CASP+ (in progress)
 - CISSP (in progress)
 - AWS Solutions Architect (in progress)
-- Google IT Support Professional (2022)
+- Google IT Support Professional (2020) - LINK
 - Stanford Machine Learning (2020)

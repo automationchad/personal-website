@@ -3,14 +3,34 @@ title: 'About'
 created: '2022-03-05'
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in dui leo. Nam sed odio congue, sagittis mi eget, finibus mi. Duis metus nisi, porta quis dapibus sit amet, auctor non dolor. Mauris sed aliquet magna, eget imperdiet massa. Maecenas varius tempus elit, venenatis sollicitudin nunc placerat vel. Vivamus ut arcu ornare, consequat dui id, viverra odio. Aenean leo augue, interdum vitae tortor eget, sollicitudin volutpat est. Ut diam nunc, tempor id mattis in, dictum a felis. Donec diam dui, venenatis non diam non, commodo bibendum odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed convallis dolor malesuada, finibus lacus sit amet, tempus arcu. Cras sem lectus, scelerisque nec volutpat eu, vestibulum a tortor. Mauris laoreet sit amet sem nec eleifend. Aliquam pharetra diam sed aliquam ultricies. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas at purus in metus porta lobortis.
+Hello my fellow human being 👋. 
 
-<br/>
+Here's the quick and dirty rundown...
 
-In hac habitasse platea dictumst. Phasellus lobortis consequat condimentum. Ut sit amet tincidunt magna. Praesent et gravida arcu, a vulputate risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed est justo, lacinia vel quam ut, gravida interdum tortor. Aliquam malesuada, nisl imperdiet volutpat ornare, mauris ex pretium libero, et dapibus ligula est non enim. Aliquam magna arcu, tincidunt sed ullamcorper sed, lacinia ut lectus. Nulla aliquam ante mi, nec feugiat risus rutrum sit amet. Vestibulum et est eget quam dictum gravida.
+🇺🇸 2018 - 2023: Swam across the Pacific to California where I went from a degree in Mechanical Engineering to a tech company sales role, then to orchestrating consulting projects in enterprise integrations, process automation and software development. 
 
-Sed ultricies, erat in congue imperdiet, purus purus porttitor dolor, non luctus dolor enim sit amet tellus. Pellentesque a magna ipsum. Duis commodo metus quis sem varius auctor. Sed eleifend lobortis elit, tempus facilisis lorem varius nec. Fusce commodo cursus orci at sollicitudin. Donec eu tristique nisi. Curabitur lectus leo, finibus ut nisl eget, pretium semper justo. Aliquam erat volutpat. Nullam aliquam ultricies pellentesque. Duis ultrices aliquet ipsum, in consectetur est blandit et. In eros sem, suscipit quis posuere non, venenatis sed sapien. Maecenas volutpat purus et lectus maximus pharetra.
+🇦🇺 2024 - beyond: Now back in my hometown Melbourne, I'm looking for an in-house full-time Sales Engineering position. Why? 
 
-Ut vel neque dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla nibh arcu, luctus id mattis ut, semper maximus eros. Vivamus luctus augue et enim scelerisque, sed consequat diam rutrum. Donec euismod nulla justo, a elementum felis facilisis eu. Curabitur faucibus non augue ac euismod. Aenean suscipit pretium dui, vel dapibus odio finibus nec.
+1. I value collaborative progress (IMO something you can only get by being internal).
 
-Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus gravida metus lacus, id pharetra velit feugiat id. Donec rutrum urna mi, quis imperdiet justo pretium ut. Proin egestas porttitor tincidunt. Proin a ligula id velit imperdiet fringilla sed at ex. Proin elementum eros sed feugiat tristique. Suspendisse sit amet efficitur ante. Nunc a condimentum sem. Integer finibus ornare augue et gravida. Nulla non congue dui. Etiam hendrerit ullamcorper tincidunt. Nunc eleifend posuere lacus sit amet bibendum. Etiam nec convallis libero, nec faucibus enim.
+2. I bring holistic experience in leading teams and navigating pre-sales challenges (which requires both tech and communication skills).
+
+3. I understand where AI and automation *should* sit: which is hopefully somewhere between working reliably and aligning with human needs.
+
+Now I'll be honest: I'm not Vitalik Buterin hiding in a cave coding the next Skynet...
+
+... (I know enough Python and Javascript to be dangerous in this crazy age of AI and the internet) ...
+
+But I do have a system designer's mind. 
+
+My approach is practical, focusing on using technical skills to deliver clear business value.
+
+Which means I think procedurally about: (1) What are we building? and (2) How do we join the LEGO pieces together?
+
+... to build something of value. 
+
+I can appreciate what businesses actually need and am realistic about what it takes to get there. 
+
+Eager to contribute to deep tech (combo of hardware and software), and B2B tech (with complex enough deal cycles).
+
+If you appreciate someone technical that also has the gift of the gab...let's connect 😄
