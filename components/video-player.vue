@@ -32,37 +32,33 @@
 					</h3>
 				</div>
 				<div class="-mx-px">
-					<div class="image overflow-clip">
+					<div class="image relative overflow-clip">
 						<div
 							class="absolute z-50 flex w-full items-center justify-between bg-black/40 px-2 text-white"
 							style="font-size: 8px"
 						>
-							<div>{{ selectedFile }}</div>
+							<div>{{ files[selectedFileIndex] }}</div>
 							<div><button @click="showNextVideo">Next File</button></div>
 						</div>
 						<div class="relative h-full w-full overflow-clip">
 							<img
+								v-if="changing"
 								src="/static.gif"
-								alt=""
+								alt="Static"
 								style="image-rendering: pixelated"
-								:class="[
-									changing ? 'opacity-100' : 'opacity-0',
-									'absolute z-10 h-full w-full object-cover transition-opacity duration-100',
-								]"
+								class="absolute z-20 h-full w-full object-cover"
 							/>
 							<video
-								:key="'stable-video-key'"
-								:class="[
-									changing ? 'opacity-0' : 'opacity-100',
-									'z-0 h-auto w-full transition-opacity duration-100',
-								]"
-								:src="`/videos/${
-									selectedFile.split('.')[0]
-								}.mp4?nocache=${Math.random()}`"
+								v-for="(file, index) in files"
+								:key="file"
 								autoplay
 								loop
 								muted
-								@loadedmetadata="handleVideoLoaded"
+								:class="[
+									index !== selectedFileIndex || changing ? 'invisible' : '',
+									'absolute h-full w-full object-cover transition-opacity duration-100',
+								]"
+								:src="`/videos/${file}`"
 							></video>
 						</div>
 					</div>
@@ -76,51 +72,30 @@
 	const files = [
 		'anime.mp4',
 		'minecraft.mp4',
-		'gallerie.mov',
+		'gallerie.mp4',
 		'aliens.mp4',
-		'soultrain.mov',
+		'soultrain.mp4',
 		'rally.mp4',
 	];
 
-	const emits = defineEmits(['close']);
-
-	const staticGif = 'static.gif';
 	const changing = ref(false);
-
-	const selectedFile = ref(files[0]);
-
-	const videoLoaded = ref(false); // New ref to track if the video has loaded
+	const selectedFileIndex = ref(0);
 
 	const showNextVideo = () => {
-		changing.value = true; // Show static GIF
-		videoLoaded.value = false; // Reset video loaded flag
-
-		const index =
-			files.indexOf(selectedFile.value) === -1
-				? 0
-				: files.indexOf(selectedFile.value);
-		selectedFile.value = files[(index + 1) % files.length];
-
-		// Wait for 1 second before checking if video has loaded
+		changing.value = true; // Show the static GIF
 		setTimeout(() => {
-			if (videoLoaded.value) {
-				changing.value = false; // If video has loaded within 1 second, hide static GIF
-			}
-			// If video hasn't loaded within 1 second, wait for the videoLoaded event to hide static GIF
-		}, 1000);
-	};
-
-	const handleVideoLoaded = () => {
-		videoLoaded.value = true; // Set video loaded flag to true
-		if (!changing.value) {
-			// If the static GIF is already scheduled to be hidden, hide it immediately
-			changing.value = false;
-		}
-		// If the static GIF is not yet scheduled to be hidden, it will be hidden by the setTimeout in showNextVideo
+			selectedFileIndex.value = (selectedFileIndex.value + 1) % files.length;
+			changing.value = false; // Hide the static GIF after a short delay
+		}, 500); // Adjust the delay as needed
 	};
 </script>
 
 <style scoped>
+	.invisible {
+		opacity: 0;
+		pointer-events: none;
+	}
+
 	.draggable-div {
 		cursor: grab;
 	}
@@ -136,6 +111,7 @@
 		content: '';
 		display: block;
 		position: absolute;
+		z-index: 40;
 		left: 0;
 		right: 0;
 		top: 0;

@@ -7,9 +7,15 @@
 @font-face {
 	font-family: 'arialRegular';
 	src: url('../../public/fonts/arial/arialRegular.ttf') format('truetype');
+	font-style: normal;
+	font-weight: normal;
+	font-display: swap;
 }
 
 @font-face {
 	font-family: 'chicagoRegular';
 	src: url('../../public/fonts/chicago/pixChicago.ttf') format('truetype');
+	font-style: normal;
+	font-weight: normal;
+	font-display: swap;
 }
