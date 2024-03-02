@@ -16,9 +16,6 @@ export default defineNuxtConfig({
 			link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
 		},
 	},
-	experimental: {
-		inlineSSRStyles: (id) => !id?.includes('entry'),
-	},
 	css: ['~/assets/css/main.css'],
 	modules: ['@nuxt/content'],
 	content: {},

@@ -11,8 +11,8 @@ module.exports = {
 	],
 	theme: {
 		fontFamily: {
-			arial: ['arial', 'sans-serif'],
-			chicago: ['pix Chicago', 'sans-serif'],
+			primary: ['arialRegular'],
+			secondary: ['chicagoRegular'],
 		},
 		extend: {
 			transitionProperty: {

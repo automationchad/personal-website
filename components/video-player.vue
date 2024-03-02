@@ -31,8 +31,8 @@
 						Marzella TV
 					</h3>
 				</div>
-				<div class="px-1 pb-1">
-					<div class="image overflow-clip border border-black">
+				<div class="-mx-px">
+					<div class="image overflow-clip">
 						<div
 							class="absolute z-50 flex w-full items-center justify-between bg-black/40 px-2 text-white"
 							style="font-size: 8px"
@@ -40,20 +40,29 @@
 							<div>{{ selectedFile }}</div>
 							<div><button @click="showNextVideo">Next File</button></div>
 						</div>
-						<div class="h-full w-full overflow-clip">
+						<div class="relative h-full w-full overflow-clip">
 							<img
-								v-if="changing"
 								src="/static.gif"
 								alt=""
-								class="h-full w-full"
+								style="image-rendering: pixelated"
+								:class="[
+									changing ? 'opacity-100' : 'opacity-0',
+									'absolute z-10 h-full w-full object-cover transition-opacity duration-100',
+								]"
 							/>
 							<video
-								v-else
-								class="z-0 h-auto w-full"
-								:src="`/videos/${selectedFile.split('.')[0]}.mp4`"
+								:key="'stable-video-key'"
+								:class="[
+									changing ? 'opacity-0' : 'opacity-100',
+									'z-0 h-auto w-full transition-opacity duration-100',
+								]"
+								:src="`/videos/${
+									selectedFile.split('.')[0]
+								}.mp4?nocache=${Math.random()}`"
 								autoplay
 								loop
 								muted
+								@loadedmetadata="handleVideoLoaded"
 							></video>
 						</div>
 					</div>
@@ -80,17 +89,34 @@
 
 	const selectedFile = ref(files[0]);
 
-	const showNextVideo = () => {
-		changing.value = true; // Set to static GIF first
+	const videoLoaded = ref(false); // New ref to track if the video has loaded
 
+	const showNextVideo = () => {
+		changing.value = true; // Show static GIF
+		videoLoaded.value = false; // Reset video loaded flag
+
+		const index =
+			files.indexOf(selectedFile.value) === -1
+				? 0
+				: files.indexOf(selectedFile.value);
+		selectedFile.value = files[(index + 1) % files.length];
+
+		// Wait for 1 second before checking if video has loaded
 		setTimeout(() => {
-			const index =
-				files.indexOf(selectedFile.value) === -1
-					? 0
-					: files.indexOf(selectedFile.value);
-			selectedFile.value = files[(index + 1) % files.length];
-			changing.value = false; // Set to the next video
-		}, 1000); // Wait for 2 seconds before showing the next video
+			if (videoLoaded.value) {
+				changing.value = false; // If video has loaded within 1 second, hide static GIF
+			}
+			// If video hasn't loaded within 1 second, wait for the videoLoaded event to hide static GIF
+		}, 1000);
+	};
+
+	const handleVideoLoaded = () => {
+		videoLoaded.value = true; // Set video loaded flag to true
+		if (!changing.value) {
+			// If the static GIF is already scheduled to be hidden, hide it immediately
+			changing.value = false;
+		}
+		// If the static GIF is not yet scheduled to be hidden, it will be hidden by the setTimeout in showNextVideo
 	};
 </script>
 

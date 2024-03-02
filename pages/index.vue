@@ -59,19 +59,25 @@
 	});
 
 	const parent = ref(null);
+	const videoPlayerRef = ref(null);
 	const mainWindowSize = { width: 600, height: 650 }; // Assuming known size
 	const highestZIndex = ref(100); // Initial z-index for top element
+	const videoPlayerSize = { width: 600, height: 420 };
 
 	// Wait for the next DOM update cycle to ensure the parent element is mounted and its dimensions are accessible
 	onMounted(() => {
 		const parentRect = parent.value.getBoundingClientRect();
 		mainWindow.posX = (parentRect.width - mainWindowSize.width) / 2;
 		mainWindow.posY = (parentRect.height - mainWindowSize.height) / 2;
+		videoWindow.posX = (window.innerWidth - videoPlayerSize.width) / 2;
+		videoWindow.posY = (window.innerHeight - videoPlayerSize.height) / 2;
 	});
 
 	const mainWindow = reactive({ posX: 0, posY: 0 }); // Initial position set to 0, will be updated
 	const videoWindow = reactive({ posX: 150, posY: 50 });
+
 	let currentChild = null;
+
 	let startX = 0;
 	let startY = 0;
 
@@ -81,6 +87,12 @@
 		startY = event.clientY - child.posY;
 		highestZIndex.value++;
 		child.zIndex = highestZIndex.value;
+
+		// Directly update the z-index of the video player if it's the current child
+		if (currentChild === videoWindow && videoPlayerRef.value) {
+			const videoPlayerEl = videoPlayerRef.value.$el; // Access the DOM element
+			videoPlayerEl.style.zIndex = highestZIndex.value;
+		}
 
 		document.addEventListener('mousemove', drag);
 		document.addEventListener('mouseup', endDrag);
@@ -93,18 +105,55 @@
 
 			// Boundary checks
 			const parentRect = parent.value.getBoundingClientRect();
-			const childWidth = currentChild.width || 100; // Assuming a default or previously set width for the child
-			const childHeight = currentChild.height || 100; // Assuming a default or previously set height for the child
+			const childWidth = currentChild.width || videoPlayerSize.width; // Use specific child width or default
+			const childHeight = currentChild.height || videoPlayerSize.height; // Use specific child height or default
 
-			// Ensure the child div stays within the parent's bounds
-			newX = Math.max(0, Math.min(newX, parentRect.width - childWidth));
-			newY = Math.max(0, Math.min(newY, parentRect.height - childHeight));
+			// Adjustments for potential borders or paddings
+			const parentBorderPaddingAdjustmentX = 0; // Adjust this value based on your parent's horizontal border and padding
+			const parentBorderPaddingAdjustmentY = -60; // Adjust this value based on your parent's vertical border and padding
+			const childBorderPaddingAdjustmentX = 0; // Adjust this value based on your child's horizontal border and padding
+			const childBorderPaddingAdjustmentY = 0; // Adjust this value based on your child's vertical border and padding
 
-			currentChild.posX = newX;
-			currentChild.posY = newY;
+			// Ensure the child div stays within the parent's bounds, including adjustments for horizontal boundaries
+			newX = Math.max(
+				0,
+				Math.min(
+					newX,
+					parentRect.width -
+						childWidth -
+						parentBorderPaddingAdjustmentX -
+						childBorderPaddingAdjustmentX
+				)
+			);
+
+			// Ensure the child div stays within the parent's bounds, including adjustments for vertical boundaries
+			newY = Math.max(
+				0,
+				Math.min(
+					newY,
+					parentRect.height -
+						childHeight -
+						parentBorderPaddingAdjustmentY -
+						childBorderPaddingAdjustmentY
+				)
+			);
+
+			// Update the position directly if dragging the video player
+			if (currentChild === videoWindow && videoPlayerRef.value) {
+				const videoPlayerEl = videoPlayerRef.value.$el; // Access the DOM element
+				videoPlayerEl.style.left = `${newX}px`;
+				videoPlayerEl.style.top = `${newY}px`;
+
+				currentChild.posX = newX;
+				currentChild.posY = newY;
+			} else {
+				// For other draggable elements that might use reactive state for positioning,
+				// update their reactive state directly.
+				currentChild.posX = newX;
+				currentChild.posY = newY;
+			}
 		}
 	};
-
 	const endDrag = () => {
 		document.removeEventListener('mousemove', drag);
 		document.removeEventListener('mouseup', endDrag);
@@ -112,7 +161,7 @@
 </script>
 
 <template>
-	<div class="h-full w-full overflow-clip">
+	<div class="h-screen w-screen overflow-clip font-primary">
 		<div
 			class="fixed h-full w-screen"
 			style="
@@ -121,7 +170,10 @@
 				background-size: cover;
 			"
 		></div>
-		<div class="absolute inset-x-[20px] top-10 z-10 flex w-32 flex-col gap-8">
+		<nav
+			id="nav"
+			class="absolute inset-x-[20px] top-10 z-10 flex w-32 flex-col gap-8"
+		>
 			<div v-for="file in files" :key="file" class="flex flex-col items-center">
 				<a
 					v-if="file.type !== 'app'"
@@ -151,14 +203,14 @@
 					</div>
 				</button>
 			</div>
-		</div>
+		</nav>
 
 		<div
 			class="absolute flex h-full w-full items-center justify-center overflow-clip"
 			ref="parent"
 		>
 			<div
-				class="pointer-events-auto inset-x-0 z-10 flex max-h-[650px] min-w-[600px] max-w-[600px] flex-col justify-between border border-black bg-[#EDFBFC]"
+				class="pointer-events-auto z-10 flex max-h-[650px] min-w-[600px] max-w-[600px] flex-col justify-between border border-black bg-[#EDFBFC]"
 				style="box-shadow: 5px 5px 0 #0003 !important"
 				:style="{
 					position: 'absolute',
@@ -200,13 +252,7 @@
 								class="h-px border-b border-t border-b-white border-t-black"
 							></div>
 						</div>
-						<h3
-							style="
-								font-size: 8px;
-								font-weight: 200;
-								font-family: 'pix Chicago', sans-serif;
-							"
-						>
+						<h3 style="font-size: 8px; font-weight: 200" class="font-secondary">
 							Will Marzella
 						</h3>
 					</div>
@@ -271,20 +317,14 @@
 					</div>
 				</div>
 			</div>
+			<VideoPlayer
+				v-if="showTV"
+				class="absolute right-1/4 top-1/4"
+				ref="videoPlayerRef"
+				@mousedown="startDrag($event, videoWindow)"
+				@close="showTV = false"
+			/>
 		</div>
-		<VideoPlayer
-			v-if="showTV"
-			class="absolute right-12 top-10 z-0"
-			:style="{
-				position: 'absolute',
-				top: videoWindow.posY + 'px',
-				left: videoWindow.posX + 'px',
-				userSelect: 'none',
-				zIndex: videoWindow.zIndex,
-			}"
-			@mousedown="startDrag($event, videoWindow)"
-			@close="showTV = false"
-		/>
 	</div>
 </template>
 

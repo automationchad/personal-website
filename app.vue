@@ -7,7 +7,6 @@
 		color: black;
 		font-size: 11px;
 		line-height: 200%;
-		font-family: 'arial', sans-serif;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 	}

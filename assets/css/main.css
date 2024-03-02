@@ -5,12 +5,11 @@
 /* mono font */
 
 @font-face {
-	font-family: 'arial';
-	src: url('../../public/fonts/arial/PixelArialRegular.ttf') format('truetype');
+	font-family: 'arialRegular';
+	src: url('../../public/fonts/arial/arialRegular.ttf') format('truetype');
 }
 
 @font-face {
-	font-family: 'pix Chicago';
-	src: url('../../public/fonts/chicago/PixelChicagoRegular.ttf')
-		format('truetype');
+	font-family: 'chicagoRegular';
+	src: url('../../public/fonts/chicago/pixChicago.ttf') format('truetype');
 }
