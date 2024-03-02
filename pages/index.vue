@@ -52,6 +52,16 @@
 		window.zIndex = highestZIndex.value;
 	};
 
+	const markdown = ref(null);
+
+	const getMarkdown = async (path) => {
+		const { data } = await useAsyncData('page-data', () =>
+			queryContent(`/${path.slug}`).findOne()
+		);
+		markdown.value = data;
+		selectedTab.value = path;
+	};
+
 	watch(showTV, (newValue, oldValue) => {
 		if (newValue === true) {
 			makeHighest(videoWindow);
@@ -283,11 +293,9 @@
 							v-else
 							class="max-h-[420px] min-h-[420px] overflow-y-auto border border-black p-2"
 						>
-							<ContentDoc
-								:path="`/${selectedTab.slug}`"
-								:key="`/${selectedTab.slug}`"
+							<ContentRenderer
+								:value="markdown.value || ''"
 								class="scroll prose prose-zinc"
-								:head="false"
 								style="
 									font-size: 10px;
 									color: black;
@@ -296,6 +304,10 @@
 									white-space: pre-wrap;
 								"
 							/>
+							<!-- <ContentDoc
+								:path="`/${selectedTab.slug}`"
+								:key="`/${selectedTab.slug}`"
+							/> -->
 						</div>
 					</div>
 					<div
@@ -311,7 +323,7 @@
 							]"
 							v-for="(tab, i) in tabs"
 							:key="tab"
-							@click="selectedTab = tab"
+							@click="getMarkdown(tab)"
 						>
 							<div
 								class="relative z-50 flex h-full w-auto flex-grow flex-col items-center justify-between border-b border-l border-r border-t border-b-black/30 border-l-white border-r-black/30 border-t-white pb-1 pt-2"

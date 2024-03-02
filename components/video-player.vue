@@ -72,7 +72,7 @@
 	const emits = defineEmits(['close']);
 	const files = [
 		'jujustu-kaizen.mp4',
-		'bruce-lee.mp4',
+		'racers.mp4',
 		'minecraft.mp4',
 		'hackerman.mp4',
 		'gallerie.mp4',
