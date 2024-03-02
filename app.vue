@@ -9,6 +9,7 @@
 		line-height: 200%;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
+		user-select: none;
 	}
 
 	html {

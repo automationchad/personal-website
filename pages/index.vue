@@ -55,13 +55,21 @@
 	watch(showTV, (newValue, oldValue) => {
 		if (newValue === true) {
 			makeHighest(videoWindow);
+			// Ensure the video element's style is updated based on its reactive state when it's first shown
+			nextTick(() => {
+				if (videoPlayerRef.value) {
+					const videoPlayerEl = videoPlayerRef.value.$el; // Access the DOM element
+					videoPlayerEl.style.left = `${videoWindow.posX}px`;
+					videoPlayerEl.style.top = `${videoWindow.posY}px`;
+				}
+			});
 		}
 	});
 
 	const parent = ref(null);
 	const videoPlayerRef = ref(null);
 	const mainWindowSize = { width: 600, height: 650 }; // Assuming known size
-	const highestZIndex = ref(100); // Initial z-index for top element
+	const highestZIndex = ref(20); // Initial z-index for top element
 	const videoPlayerSize = { width: 600, height: 420 };
 
 	// Wait for the next DOM update cycle to ensure the parent element is mounted and its dimensions are accessible
@@ -92,6 +100,9 @@
 		if (currentChild === videoWindow && videoPlayerRef.value) {
 			const videoPlayerEl = videoPlayerRef.value.$el; // Access the DOM element
 			videoPlayerEl.style.zIndex = highestZIndex.value;
+			// Directly update the element's style to reflect its current position
+			videoPlayerEl.style.left = `${child.posX}px`;
+			videoPlayerEl.style.top = `${child.posY}px`;
 		}
 
 		document.addEventListener('mousemove', drag);
@@ -264,6 +275,7 @@
 							<img
 								src="/wallpaper.png"
 								class="h-full w-full"
+								draggable="false"
 								style="image-rendering: crisp-edges; background-size: cover"
 							/>
 						</div>
@@ -273,6 +285,7 @@
 						>
 							<ContentDoc
 								:path="`/${selectedTab.slug}`"
+								:key="`/${selectedTab.slug}`"
 								class="scroll prose prose-zinc"
 								:head="false"
 								style="
@@ -319,10 +332,10 @@
 			</div>
 			<VideoPlayer
 				v-if="showTV"
-				class="absolute right-1/4 top-1/4"
+				class="absolute right-1/4 top-1/4 z-30"
 				ref="videoPlayerRef"
 				@mousedown="startDrag($event, videoWindow)"
-				@close="showTV = false"
+				@close="showTV = !showTV"
 			/>
 		</div>
 	</div>

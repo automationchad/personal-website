@@ -11,7 +11,7 @@
 					<div class="flex flex-row space-x-1" style="font-size: 7px">
 						<button
 							@click="emits('close')"
-							class="flex h-4 w-4 items-center justify-center border border-black"
+							class="z-50 flex h-4 w-4 items-center justify-center border border-black"
 						>
 							𝗫
 						</button>
@@ -46,7 +46,7 @@
 								src="/static.gif"
 								alt="Static"
 								style="image-rendering: pixelated"
-								class="absolute z-20 h-full w-full object-cover"
+								class="absolute h-full w-full object-cover"
 							/>
 							<video
 								v-for="(file, index) in files"
@@ -69,17 +69,33 @@
 </template>
 
 <script setup>
+	const emits = defineEmits(['close']);
 	const files = [
-		'anime.mp4',
+		'jujustu-kaizen.mp4',
+		'bruce-lee.mp4',
 		'minecraft.mp4',
+		'hackerman.mp4',
 		'gallerie.mp4',
 		'aliens.mp4',
 		'soultrain.mp4',
 		'rally.mp4',
+		'exmachina-dance.mp4',
+		'prince-of-egypt.mp4',
+		'rocky.mp4',
+		'hades.mp4',
+		'ghibli.mp4',
+		'kuzcos-poison.mp4',
 	];
 
 	const changing = ref(false);
 	const selectedFileIndex = ref(0);
+
+	onMounted(() => {
+		changing.value = true;
+		setTimeout(() => {
+			changing.value = false;
+		}, 500);
+	});
 
 	const showNextVideo = () => {
 		changing.value = true; // Show the static GIF
