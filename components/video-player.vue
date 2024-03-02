@@ -10,12 +10,13 @@
 				<div class="flex flex-row items-center justify-between space-x-2 p-1">
 					<div class="flex flex-row space-x-1" style="font-size: 7px">
 						<button
+							@click="emits('close')"
 							class="flex h-4 w-4 items-center justify-center border border-black"
 						>
 							𝗫
 						</button>
 					</div>
-					<div class="w-auto flex-grow space-y-0.5">
+					<div class="draggable-div w-auto flex-grow space-y-0.5">
 						<div
 							class="h-px border-b border-t border-b-white border-t-black"
 						></div>
@@ -49,7 +50,7 @@
 							<video
 								v-else
 								class="z-0 h-auto w-full"
-								:src="`/${selectedFile}`"
+								:src="`/videos/${selectedFile.split('.')[0]}.mp4`"
 								autoplay
 								loop
 								muted
@@ -63,7 +64,16 @@
 </template>
 
 <script setup>
-	const files = ['bg.mp4', 'video-loop.mp4', 'minecraft.mp4'];
+	const files = [
+		'anime.mp4',
+		'minecraft.mp4',
+		'gallerie.mov',
+		'aliens.mp4',
+		'soultrain.mov',
+		'rally.mp4',
+	];
+
+	const emits = defineEmits(['close']);
 
 	const staticGif = 'static.gif';
 	const changing = ref(false);
@@ -80,11 +90,18 @@
 					: files.indexOf(selectedFile.value);
 			selectedFile.value = files[(index + 1) % files.length];
 			changing.value = false; // Set to the next video
-		}, 2000); // Wait for 2 seconds before showing the next video
+		}, 1000); // Wait for 2 seconds before showing the next video
 	};
 </script>
 
 <style scoped>
+	.draggable-div {
+		cursor: grab;
+	}
+
+	.draggable-div:active {
+		cursor: grabbing;
+	}
 	.image {
 		position: relative;
 		height: 320px;

@@ -35,9 +35,80 @@
 			link: 'https://www.youtube.com/watch?v=3v1n3v7k3v',
 			icon: '/icons/undead/Icon32.png',
 		},
+		{
+			name: 'Marzella TV',
+			type: 'app',
+			link: 'https://www.youtube.com/watch?v=3v1n3v7k3v',
+			icon: '/icons/undead/Icon23.png',
+			action: () => (showTV.value = true),
+		},
 	];
 
 	const selectedTab = ref(null);
+
+	const showTV = ref(false);
+
+	const makeHighest = (window) => {
+		window.zIndex = highestZIndex.value;
+	};
+
+	watch(showTV, (newValue, oldValue) => {
+		if (newValue === true) {
+			makeHighest(videoWindow);
+		}
+	});
+
+	const parent = ref(null);
+	const mainWindowSize = { width: 600, height: 650 }; // Assuming known size
+	const highestZIndex = ref(100); // Initial z-index for top element
+
+	// Wait for the next DOM update cycle to ensure the parent element is mounted and its dimensions are accessible
+	onMounted(() => {
+		const parentRect = parent.value.getBoundingClientRect();
+		mainWindow.posX = (parentRect.width - mainWindowSize.width) / 2;
+		mainWindow.posY = (parentRect.height - mainWindowSize.height) / 2;
+	});
+
+	const mainWindow = reactive({ posX: 0, posY: 0 }); // Initial position set to 0, will be updated
+	const videoWindow = reactive({ posX: 150, posY: 50 });
+	let currentChild = null;
+	let startX = 0;
+	let startY = 0;
+
+	const startDrag = (event, child) => {
+		currentChild = child;
+		startX = event.clientX - child.posX;
+		startY = event.clientY - child.posY;
+		highestZIndex.value++;
+		child.zIndex = highestZIndex.value;
+
+		document.addEventListener('mousemove', drag);
+		document.addEventListener('mouseup', endDrag);
+	};
+
+	const drag = (event) => {
+		if (currentChild) {
+			let newX = event.clientX - startX;
+			let newY = event.clientY - startY;
+
+			// Boundary checks
+			const parentRect = parent.value.getBoundingClientRect();
+			const childWidth = currentChild.width || 100; // Assuming a default or previously set width for the child
+			const childHeight = currentChild.height || 100; // Assuming a default or previously set height for the child
+
+			// Ensure the child div stays within the parent's bounds
+			newX = Math.max(0, Math.min(newX, parentRect.width - childWidth));
+			newY = Math.max(0, Math.min(newY, parentRect.height - childHeight));
+
+			currentChild.posX = newX;
+			currentChild.posY = newY;
+		}
+	};
+
+	const endDrag = () => {
+		document.removeEventListener('mousemove', drag);
+		document.removeEventListener('mouseup', endDrag);
+	};
 </script>
 
 <template>
@@ -51,11 +122,25 @@
 			"
 		></div>
 		<div class="absolute inset-x-[20px] top-10 z-10 flex w-32 flex-col gap-8">
-			<div v-for="file in files" :key="file">
+			<div v-for="file in files" :key="file" class="flex flex-col items-center">
 				<a
-					class="group flex cursor-pointer flex-col items-center space-y-1"
+					v-if="file.type !== 'app'"
+					class="group flex w-min flex-grow cursor-pointer flex-col items-center space-y-1"
 					:href="file.link"
 					target="_blank"
+				>
+					<img :src="file.icon" alt="" class="h-10 w-auto" />
+					<div
+						style="font-size: 9px"
+						class="leading-0 flex items-center justify-center whitespace-nowrap px-1 group-visited:border group-visited:border-dotted group-visited:border-white group-target:bg-black group-target:text-white group-focus:border group-focus:border-dotted group-focus:border-white group-focus:bg-black group-focus:text-white group-active:bg-black group-active:text-white"
+					>
+						{{ file.name }}
+					</div>
+				</a>
+				<button
+					v-else
+					@click="file.action"
+					class="group flex cursor-pointer flex-col items-center space-y-1"
 				>
 					<img :src="file.icon" alt="" class="h-10 w-auto" />
 					<div
@@ -64,19 +149,27 @@
 					>
 						{{ file.name }}
 					</div>
-				</a>
+				</button>
 			</div>
 		</div>
 
 		<div
 			class="absolute flex h-full w-full items-center justify-center overflow-clip"
+			ref="parent"
 		>
 			<div
-				@click="makeTopElement"
-				class="inset-x-0 z-10 flex max-h-[650px] min-w-[600px] max-w-[600px] flex-col justify-between border border-black bg-[#EDFBFC]"
+				class="pointer-events-auto inset-x-0 z-10 flex max-h-[650px] min-w-[600px] max-w-[600px] flex-col justify-between border border-black bg-[#EDFBFC]"
 				style="box-shadow: 5px 5px 0 #0003 !important"
+				:style="{
+					position: 'absolute',
+					top: mainWindow.posY + 'px',
+					left: mainWindow.posX + 'px',
+					userSelect: 'none',
+					zIndex: mainWindow.zIndex,
+				}"
 			>
 				<div
+					@click="makeHighest(mainWindow)"
 					class="z-0 h-full w-full border-l border-r border-t border-l-white border-r-black/30 border-t-white"
 				>
 					<div class="flex flex-row items-center justify-between space-x-2 p-1">
@@ -93,7 +186,10 @@
 								{{ showSection ? '⬆' : '⬇' }}
 							</button>
 						</div>
-						<div class="w-auto flex-grow space-y-0.5">
+						<div
+							class="draggable-div w-auto flex-grow space-y-0.5"
+							@mousedown="startDrag($event, mainWindow)"
+						>
 							<div
 								class="h-px border-b border-t border-b-white border-t-black"
 							></div>
@@ -176,11 +272,31 @@
 				</div>
 			</div>
 		</div>
-		<VideoPlayer class="absolute right-12 top-10 z-0" />
+		<VideoPlayer
+			v-if="showTV"
+			class="absolute right-12 top-10 z-0"
+			:style="{
+				position: 'absolute',
+				top: videoWindow.posY + 'px',
+				left: videoWindow.posX + 'px',
+				userSelect: 'none',
+				zIndex: videoWindow.zIndex,
+			}"
+			@mousedown="startDrag($event, videoWindow)"
+			@close="showTV = false"
+		/>
 	</div>
 </template>
 
 <style scoped>
+	.draggable-div {
+		cursor: grab;
+		touch-action: none; /* Prevents mobile browsers from handling drag as scroll */
+	}
+
+	.draggable-div:active {
+		cursor: grabbing;
+	}
 	/* Style for the scrollbar track */
 
 	.scroll::-webkit-scrollbar {
